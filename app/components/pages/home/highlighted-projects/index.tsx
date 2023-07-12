@@ -1,6 +1,6 @@
 import { HorizontalDivider } from "@/app/components/divider/horizontal"
 import { SectionTitle } from "@/app/components/section-title"
-import { ProjectCard } from "./project-cards"
+import { HighlightedCards } from "./project-cards"
 import { CustomLink } from "@/app/components/link"
 import { HiArrowNarrowRight } from "react-icons/hi"
 
@@ -14,9 +14,9 @@ export const HighlightedProjects = () => {
             <HorizontalDivider className="mb-16" />
 
             <div>
-                <ProjectCard />
+                <HighlightedCards />
                 <HorizontalDivider className="my-16" />
-                <ProjectCard />
+                <HighlightedCards />
                 <HorizontalDivider className="my-16" />
 
                 <p className="flex items-center gap-1.5">

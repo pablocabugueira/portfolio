@@ -3,7 +3,7 @@ import { TechBadge } from "@/app/components/tech-badge"
 import Image from "next/image"
 import { HiArrowNarrowRight } from "react-icons/hi"
 
-export const ProjectCard = () => {
+export const HighlightedCards = () => {
     return (
         <div className="flex gap-6 lg:gap-12 flex-col lg:flex-row">
             <div className="w-full h-full">
