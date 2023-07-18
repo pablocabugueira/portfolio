@@ -1,8 +1,11 @@
+"use client"
+
 import Image from "next/image"
-import { TechBadge } from "../../tech-badge"
-import { CustomButton } from "../../button"
+import { TechBadge } from "../../../tech-badge"
+import { CustomButton } from "../../../button"
 import { HiArrowNarrowRight } from "react-icons/hi"
 import { TbBrandGithub, TbBrandLinkedin, TbBrandWhatsapp } from "react-icons/tb"
+import { cp } from "fs"
 
 const MOCK_DOCKS = [
     {
@@ -20,6 +23,13 @@ const MOCK_DOCKS = [
 ]
 
 export const HeroSection = () => {
+    const HandleContact = () => {
+        const contactSection = document.querySelector("#contact")
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth"})
+        }
+    }
+
     return (
         <section className="w-full lg:h-[755px] bg-hero-image bg-cover bg-center bg-no-repeat flex flex-col justify-end pb-10 sm:pb-32 py-32 lg:pb-[110px]">
             <div className="container flex items-start justify-between flex-col-reverse lg:flex-row">
@@ -38,7 +48,7 @@ export const HeroSection = () => {
                     </div>
 
                     <div className="mt-6 lg:mt-10 flex sm:items-center sm:gap-5 flex-col sm:flex-row">
-                        <CustomButton className="w-max shadow-button">
+                        <CustomButton className="w-max shadow-button" onClick={HandleContact}>
                             Entre em contato
                             <HiArrowNarrowRight size={18} />
                         </CustomButton>
