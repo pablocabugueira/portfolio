@@ -4,25 +4,15 @@ import Image from "next/image"
 import { TechBadge } from "../../../tech-badge"
 import { CustomButton } from "../../../button"
 import { HiArrowNarrowRight } from "react-icons/hi"
-import { TbBrandGithub, TbBrandLinkedin, TbBrandWhatsapp } from "react-icons/tb"
-import { cp } from "fs"
+import { HomePageInfo } from "@/app/types/page-info"
+import { RichText } from "@/app/components/rich-text"
+import { CMSIcon } from "@/app/components/cms-icon"
 
-const MOCK_DOCKS = [
-    {
-        url: "https://github.com/pablocabugueira",
-        icon: <TbBrandGithub />
-    },
-    {
-        url: "https://www.linkedin.com/in/pablo-galvao-cabugueira/",
-        icon: <TbBrandLinkedin />
-    },
-    {
-        url: "https://wa.me/5511946060422",
-        icon: <TbBrandWhatsapp />
-    },
-]
+type HomeSectionProps = {
+    homeInfo: HomePageInfo
+}
 
-export const HeroSection = () => {
+export const HeroSection = ({ homeInfo }: HomeSectionProps) => {
     const HandleContact = () => {
         const contactSection = document.querySelector("#contact")
         if (contactSection) {
@@ -37,12 +27,14 @@ export const HeroSection = () => {
                     <p className="font-mono text-emerald-400">Olá, meu nome é</p>
                     <strong className="text-4xl font-medium mt-2">Pablo Cabugueira</strong>
 
-                    <p className="text-gray-400 my-6 text-sm sm:text-base">Olá, meu nome é Pablo Cabugueira e eu sou um desenvolvedor front-end apaixonado por tecnologia.</p>
+                    <div className="text-gray-400 my-6 text-sm sm:text-base">
+                        <RichText content={homeInfo.introduction.raw} />
+                    </div>
 
                     <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px]">
-                        {Array.from({ length: 5 }).map((_, index) => (
+                        {homeInfo.technologies.map((tech) => (
                             <TechBadge
-                                name="Next.js"
+                                name={tech.name}
                             />
                         ))}
                     </div>
@@ -54,14 +46,14 @@ export const HeroSection = () => {
                         </CustomButton>
 
                         <div className="text-2xl text-gray-600 flex items-center h-20 gap-3">
-                            {MOCK_DOCKS.map((contact, index) => (
+                            {homeInfo.socials.map((contact, index) => (
                                 <a
                                     href={contact.url}
                                     key={`contact-${index}`}
                                     target="_blank"
                                     className="hover:text-gray-100 transition-colors"
                                 >
-                                    {contact.icon}
+                                    <CMSIcon icon={contact.iconSvg} />
                                 </a>
                             ))}
                         </div>
@@ -72,7 +64,7 @@ export const HeroSection = () => {
                     className="w-[315px] h-[300px] lg:w-[427px] lg:h-[404px] mb-6 lg:mb-0 rounded-lg object-cover"
                     width={420}
                     height={404}
-                    src="/images/header-img.svg"
+                    src={homeInfo.profilePicture.url}
                     alt="Astronaut Picture"
                 />
             </div>
