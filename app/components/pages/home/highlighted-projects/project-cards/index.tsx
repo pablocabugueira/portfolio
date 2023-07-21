@@ -1,17 +1,22 @@
 import { CustomLink } from "@/app/components/link"
 import { TechBadge } from "@/app/components/tech-badge"
+import { Project } from "@/app/types/projects"
 import Image from "next/image"
 import { HiArrowNarrowRight } from "react-icons/hi"
 
-export const HighlightedCards = () => {
+type HighlightedCardsProps = {
+    project: Project
+}
+
+export const HighlightedCards = ({ project }: HighlightedCardsProps) => {
     return (
         <div className="flex gap-6 lg:gap-12 flex-col lg:flex-row">
             <div className="w-full h-full">
                 <Image
                     width={420}
                     height={304}
-                    src="/images/preview.png"
-                    alt="Thumbnail do projeto BitCent"
+                    src={project.thumbnail.url}
+                    alt={`Thumbnail do projeto ${project.title}`}
                     className="w-full h-[200px] sm:h-[300px] lg:w-[420px] lg:min-h-full object-cover rounded-lg"
                 />
             </div>
@@ -24,22 +29,20 @@ export const HighlightedCards = () => {
                         alt=""
                         src="/images/icons/project-title-icon.svg"
                     />
-                    BitCent
+                    {project.title}
                 </h3>
 
                 <p className="text-gray-400 my-6">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, sed labore facilis velit repudiandae ad repellendus atque commodi, debitis eveniet perspiciatis maiores in quidem ipsum a rerum dignissimos minima quibusdam quod sequi fugit quos consequuntur facere iste. Esse dolor mollitia, voluptate tempore sint beatae rem, quod aliquid excepturi rerum harum.
+                    {project.shortDescription}
                 </p>
 
                 <div className="flex gap-x-2 gap-y-3 flex-wrap mb-8 lg:max-w-[350px]">
-                    <TechBadge name="Next.js" />
-                    <TechBadge name="Next.js" />
-                    <TechBadge name="Next.js" />
-                    <TechBadge name="Next.js" />
-                    <TechBadge name="Next.js" />
+                    {project.technologies.map(tech => (
+                        <TechBadge key={`${project.title}-tech-${tech.name}`} name={tech.name} />
+                    ))}
                 </div>
 
-                <CustomLink href="/projects/bitcent">
+                <CustomLink href={`/projects/${project.slug}`}>
                     Ver projeto
                     <HiArrowNarrowRight />
                 </CustomLink>
